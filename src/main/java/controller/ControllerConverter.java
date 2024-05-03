@@ -1,6 +1,5 @@
 package controller;
 
-import domain.stack.StackException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -266,8 +265,8 @@ public class ControllerConverter {
                 }
                 stack.pop(); // Sacar el paréntesis abierto correspondiente
             }
-            // Si es un operador, sacar operadores de la pila y agregar a la expresión postfija
-            // hasta que se encuentre un operador con menor prioridad o se llegue al final de la pila
+            // Si es un operador, se saca a los operadores de la pila y agrega a la expresión postfija hasta
+            // que se encuentre un operador con menor prioridad o se llegue al final de la pila
             else {
                 while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(c)) {
                     postfixExpression.append(stack.pop());
@@ -276,7 +275,7 @@ public class ControllerConverter {
             }
         }
 
-        // Sacar los operadores restantes de la pila y agregar a la expresión postfija
+        // Saca los operadores restantes de la pila y los agrega a la expresión postfija
         while (!stack.isEmpty()) {
             postfixExpression.append(stack.pop());
         }
@@ -300,22 +299,18 @@ public class ControllerConverter {
         for (int i = 0; i < reversedInfix.length(); i++) {
             char c = reversedInfix.charAt(i);
 
-            // Si el caracter es una letra o un dígito (operando), se agrega directamente a la expresión prefija
             if (Character.isLetterOrDigit(c)) {
                 prefixExpression.append(c);
             }
-            // Si es un paréntesis abierto, se agrega a la pila
             else if (c == '(') {
                 operatorStack.push(c);
             }
-            // Si es un paréntesis cerrado, se sacan los operadores de la pila y se agregan a la expresión prefija
             else if (c == ')') {
                 while (!operatorStack.isEmpty() && operatorStack.peek() != '(') {
                     prefixExpression.append(operatorStack.pop());
                 }
-                operatorStack.pop(); // Sacar el paréntesis abierto correspondiente
+                operatorStack.pop();
             }
-            // Si es un operador
             else {
                 while (!operatorStack.isEmpty() && getPriority(operatorStack.peek()) >= getPriority(c)) {
                     prefixExpression.append(operatorStack.pop());
@@ -324,12 +319,10 @@ public class ControllerConverter {
             }
         }
 
-        // Sacar los operadores restantes de la pila y agregar a la expresión prefija
         while (!operatorStack.isEmpty()) {
             prefixExpression.append(operatorStack.pop());
         }
 
-        // Invertir la expresión prefija para obtener el resultado final
         return prefixExpression.reverse().toString();
     }
 
@@ -340,25 +333,18 @@ public class ControllerConverter {
         for (int i = 0; i < postfixExpression.length(); i++) {
             char c = postfixExpression.charAt(i);
 
-            // Si el caracter es una letra o un dígito (operando), se agrega a la pila
             if (Character.isLetterOrDigit(c)) {
                 stack.push(String.valueOf(c));
             }
-            // Si es un operador
             else {
-                // Extraer los dos operandos de la pila
                 String ope2 = stack.pop();
                 String ope1 = stack.pop();
 
-                // Construir la expresión infija con paréntesis y el operador
                 String infix = "(" + ope1 + c + ope2 + ")";
 
-                // Agregar la expresión infija resultante a la pila
                 stack.push(infix);
             }
         }
-
-        // El tope de la pila contendrá la expresión infija final
         return stack.pop();
     }
     public String postfixToPrefixConverter(String postfixExpression) {
@@ -367,25 +353,20 @@ public class ControllerConverter {
         for (int i = 0; i < postfixExpression.length(); i++) {
             char c = postfixExpression.charAt(i);
 
-            // Si el caracter es una letra o un dígito (operando), se agrega a la pila
             if (Character.isLetterOrDigit(c)) {
                 stack.push(String.valueOf(c));
             }
-            // Si es un operador
             else {
-                // Extraer los dos operandos de la pila
                 String ope2 = stack.pop();
                 String ope1 = stack.pop();
 
-                // Construir la expresión prefija con el operador y los operandos
                 String prefix = c + ope1 + ope2;
-
-                // Agregar la expresión prefija resultante a la pila
                 stack.push(prefix);
+
             }
         }
 
-        // El tope de la pila contendrá la expresión prefija final
+
         return stack.pop();
     }
 
@@ -440,7 +421,7 @@ public class ControllerConverter {
         } else if (operator == '+' || operator == '-') {
             return 1;
         } else {
-            return 0; // Para cualquier otro carácter (por ejemplo, paréntesis)
+            return 0; // Para cualquier otro carácter
         }
     }
 }

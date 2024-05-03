@@ -1,64 +1,45 @@
-package controller;
+package domain.queue;
 
 import domain.Message;
 import domain.queue.ArrayQueue;
 import domain.queue.HeaderLinkedQueue;
 import domain.queue.LinkedQueue;
 import domain.queue.QueueException;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import org.junit.jupiter.api.Test;
 import util.Utility;
 
-public class MessengerController {
+import static org.junit.jupiter.api.Assertions.*;
 
-    @FXML
-    public TextField txf_totalMessage;
-    @FXML
-    public TextArea txa_Enqueue;
-    @FXML
-    public TextArea txa_Dequeue;
+class MessageTest {
+    @Test
+    public void test() throws QueueException {
+        ArrayQueue arrayQueue = new ArrayQueue(5);
+        HeaderLinkedQueue headQueue = new HeaderLinkedQueue();
+        LinkedQueue linkedQueue = new LinkedQueue();
 
-    private ArrayQueue arrayQueue;
-    private HeaderLinkedQueue headQueue;
-    private LinkedQueue linkedQueue;
-
-    public void initialize() {
-        cleanOnAction(new ActionEvent());
-    }
-
-    public void cleanOnAction(ActionEvent actionEvent) {
-        txf_totalMessage.setText("");
-        txa_Enqueue.setText("");
-        txa_Dequeue.setText("");
-    }
-
-    public void startOnAction(ActionEvent actionEvent) throws QueueException {
-        String totalMessagesText = txf_totalMessage.getText();
-
-        // Verificar si el campo de texto está vacío
-        if (totalMessagesText.isEmpty()) {
-            // Mostrar un mensaje de error o tomar alguna otra acción apropiada
-            return;
-        }
-
-        int totalMessages = Integer.parseInt(totalMessagesText);
-        int messageNumber= Integer.parseInt(txf_totalMessage.getText());
-        arrayQueue = new ArrayQueue(messageNumber);
-        headQueue = new HeaderLinkedQueue();
-        linkedQueue = new LinkedQueue();
         Message message;
 
+        System.out.println("Adding to the queue");
+
         // Enqueue messages
-        for (int i = 0; i < messageNumber; i++) {
+        for (int i = 0; i < 5; i++) {
             message = new Message(Utility.getRandom(3), "Message No." + Utility.getRandom(15));
             arrayQueue.enQueue(message, message.getPriority());
+        }
+
+        for (int i = 0; i < 5; i++) {
+            message = new Message(Utility.getRandom(3), "Message No." + Utility.getRandom(15));
             headQueue.enQueue(message, message.getPriority());
+        }
+
+        for (int i = 0; i < 5; i++) {
+            message = new Message(Utility.getRandom(3), "Message No." + Utility.getRandom(15));
             linkedQueue.enQueue(message, message.getPriority());
         }
 
-        txa_Enqueue.setText(arrayQueue.toString() + "\n\n" + headQueue.toString() + "\n\n" + linkedQueue.toString());
+        System.out.println(arrayQueue);
+        System.out.println(headQueue);
+        System.out.println(linkedQueue);
 
         // Dequeue based on priority
         String dequeue = "";
@@ -94,6 +75,10 @@ public class MessengerController {
             }
         }
 
-        txa_Dequeue.setText(dequeue);
+        System.out.println("Dequeued Messages:\n" + dequeue);
+        System.out.println("Remaining Messages in Queues:");
+        System.out.println(arrayQueue);
+        System.out.println(headQueue);
+        System.out.println(linkedQueue);
     }
 }
