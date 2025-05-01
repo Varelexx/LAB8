@@ -43,7 +43,7 @@ public class PriorityLinkedQueue implements Queue {
     @Override
     public int indexOf(Object element) throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("PriorityLinked Queue is Empty");
         PriorityLinkedQueue aux = new PriorityLinkedQueue();
         int pos1=1;
         int pos2=-1; //si es -1 no existe
@@ -67,7 +67,7 @@ public class PriorityLinkedQueue implements Queue {
         if(isEmpty()){ //la cola no existe
             rear = newNode;
             //garantizo q anterior quede apuntando al primer nodo
-            front=rear; //anterior=posterior 
+            front=rear; //anterior=posterior
         }else{ //significa q al menos hay un elemento en la cola
             rear.next = newNode; //posterior.sgte = nuevoNodo
             rear = newNode; //posterior = nuevoNodo
@@ -75,7 +75,6 @@ public class PriorityLinkedQueue implements Queue {
         //al final actualizo el contador
         count++;
     }
-    
     @Override
     public void enQueue(Object element, Integer priority) throws QueueException {
         Node newNode = new Node(element, priority);
@@ -90,26 +89,27 @@ public class PriorityLinkedQueue implements Queue {
                 prev = aux; //dejo un rastro
                 aux = aux.next;
             }
-            //se sale cuando alcanza nulo o la prioridad del nuevo elemento
-            //es mayor
-            if(aux==front){
+            //se sale cuando alcanza nulo o la prioridad del nuevo elemento es mayor
+            if(aux==front){//preguntar si el nuevo elemento tiene una prioridad mas alta al elemento del frente
                 newNode.next = front;
                 front = newNode;
             }else
-                if(aux==null){
-                    prev.next = newNode;
-                    rear = newNode;
-                }else{ //en cualquier otro caso
-                    prev.next = newNode;
-                    newNode.next = aux;
-                }
+            if(aux==null){ //encola de forma normal
+                prev.next = newNode;
+                rear = newNode;
+            }else{ //el nuevo elemento queda en medio de 2 nodos
+                prev.next = newNode;
+                newNode.next = aux;
+            }
         }
+        count++;
     }
+
 
     @Override
     public Object deQueue() throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("Priority Linked Queue is Empty");
         Object element = front.data;
         //caso 1. cuando solo hay un elemento
         //cuando estan apuntando al mismo nodo
@@ -126,7 +126,7 @@ public class PriorityLinkedQueue implements Queue {
     @Override
     public boolean contains(Object element) throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("Priority Linked Queue is Empty");
         PriorityLinkedQueue aux = new PriorityLinkedQueue();
         boolean finded = false;
         while(!isEmpty()){
@@ -145,27 +145,27 @@ public class PriorityLinkedQueue implements Queue {
     @Override
     public Object peek() throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("Priority Linked Queue is Empty");
         return front.data;
     }
 
     @Override
     public Object front() throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("Priority Linked Queue is Empty");
         return front.data;
     }
     
     public Integer frontPriority() throws QueueException {
         if(isEmpty())
-            throw new QueueException("Linked Queue is Empty");
+            throw new QueueException("Priority Linked Queue is Empty");
         return front.priority;
     }
     
     @Override
     public String toString(){
-        if(isEmpty()) return "Linked Queue is Empty";
-        String result = "\nLinked Queue Content:\n";
+        if(isEmpty()) return "Priority Linked Queue is Empty";
+        String result = "\nPriority Linked Queue Content:\n";
         try {
             PriorityLinkedQueue aux = new PriorityLinkedQueue();
             while(!isEmpty()){

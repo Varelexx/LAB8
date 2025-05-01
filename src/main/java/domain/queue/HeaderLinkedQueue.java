@@ -5,11 +5,7 @@
  */
 package domain.queue;
 
-/**
- *
- * @author Profesor Lic. Gilberth Chaves A.
- * Cola enlazada con nodo cabecera (nodo vacio)
- */
+
 public class HeaderLinkedQueue implements Queue {
     private Node front; //anterior
     private Node rear; //posterior
@@ -63,11 +59,11 @@ public class HeaderLinkedQueue implements Queue {
     public void enQueue(Object element) throws QueueException {
         Node newNode = new Node(element);
         rear.next = newNode; //posterior.sgte=nuevoNodo
-        rear = newNode; //posterior=nuevoNodo
-        //al final actualizo el contador
+        rear = newNode; //posterior = nuevoNodo
+        //avanzar el contador
         count++;
     }
-    
+
     @Override
     public void enQueue(Object element, Integer priority) throws QueueException {
         Node newNode = new Node(element, priority);
@@ -107,7 +103,7 @@ public class HeaderLinkedQueue implements Queue {
         if(front.next==rear){
             clear(); //elimino la cola
         }else{ //caso 2. caso contrario
-            front.next = front.next.next;
+            front.next = front.next.next; //anterior.sgte = anterior.sgte.sgte
         }
         //actualizo el contador de elementos encolados
         count--;

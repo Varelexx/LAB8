@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package domain.queue;
+
+import domain.stack.LinkedStack;
+import domain.stack.StackException;
+
 /**
  *
  * @author Profesor Lic. Gilberth Chaves A.
@@ -13,7 +17,7 @@ public class LinkedQueue implements Queue {
     private Node front; //anterior
     private Node rear; //posterior
     private int count; //control de elementos encolados
-    
+
     //Constructor
     public LinkedQueue(){
         front=rear=null;
@@ -75,7 +79,7 @@ public class LinkedQueue implements Queue {
         //al final actualizo el contador
         count++;
     }
-    
+
     @Override
     public void enQueue(Object element, Integer priority) throws QueueException {
         Node newNode = new Node(element, priority);
@@ -180,6 +184,60 @@ public class LinkedQueue implements Queue {
             System.out.println(ex.getMessage());
         }
         return result;
+    }
+
+    /*public void reverseLastK(int k)throws QueueException{
+
+        //Si la variable es menor o igual a 0 no debe retornar nada
+        if (k<=0)return;
+
+        //Si lista está vacía o el valor de k es superiro al tamaño de la lista entonces retornará un mensaje de excepción
+        if(isEmpty()||size()<k){
+            throw new QueueException("La cola está vacía o no contiene la cantidad suficiente de elementos");
+        }
+
+        LinkedStack stack = new LinkedStack();
+
+        //Tomo los primeros datos(o los que no son seleccionados) y los a;ade a la pila
+        int size = size();
+        for (int i = 0; i < size-k; i++) {
+            stack.push(deQueue());
+
+            while (!stack.isEmpty()){
+                enQueue(stack.pop());
+            }
+        }
+    }*/
+
+    public void reverseLastK(int k)throws QueueException{
+
+        //Si la variable es menor o igual a 0 no debe retornar nada
+        if (k<=0)return;
+
+        LinkedQueue tempQueue = new LinkedQueue();
+
+        //Si lista está vacía o el valor de k es superiro al tamaño de la lista entonces retornará un mensaje de excepción
+        if(isEmpty()||size()<k){
+            throw new QueueException("La cola está vacía o no contiene la cantidad suficiente de elementos");
+        }
+
+
+        //Tomo los primeros datos(o los que no son seleccionados) y los a;ade a la cola temporal
+        int size = size();
+        for (int i = 0; i < size-k; i++) {
+            tempQueue.enQueue(deQueue());
+        }
+
+        //Invertir los elementos seleccionados utilizando el auxiliar
+        LinkedQueue reverseQueue = new LinkedQueue();
+        for (int i = 0; i < k; i++) {
+            reverseQueue.enQueue(reverseQueue.deQueue());
+
+            while (!tempQueue.isEmpty()){
+                enQueue((tempQueue.deQueue()));
+            }
+
+        }
     }
 
 }

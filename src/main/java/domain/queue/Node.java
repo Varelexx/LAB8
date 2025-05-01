@@ -11,7 +11,7 @@ package domain.queue;
  */
 public class Node {
     public Object data; //elemento guardado en el nodo
-    public Integer priority; //1=high, 2=medium, 3=low
+    public Integer priority; //1=low, 2=medium, 3=high
     public Node next; //enlace al sgte nodo
     
     //Constructor
@@ -21,7 +21,7 @@ public class Node {
     }
     
     //Constructor sobrecargado
-    public Node(Object data, Integer priority){
+    public Node(Object data, int priority){
         this.data = data;
         this.priority = priority;
         this.next = null; //apunta a nulo

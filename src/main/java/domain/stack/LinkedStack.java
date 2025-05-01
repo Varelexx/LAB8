@@ -72,25 +72,26 @@ public class LinkedStack implements Stack {
         counter--;
         return topElement;
     }
-    
+
     @Override
     public String toString() {
-        if(isEmpty()) return "Linked Stack is Empty";
-        String result = "\nLinked Stack Content";
+        if (isEmpty()) return "Linked Stack is Empty";
+        String result="Linked Stack Conten:\n";
         try {
             LinkedStack aux = new LinkedStack();
-            while(!isEmpty()){           
-                    result+="\n"+peek();
-                    aux.push(pop());
+            while (!isEmpty()){
+                result+=peek()+"\n";
+                aux.push(pop());
             }
-            
-            //dejamos la pila como al inicio
-            while(!aux.isEmpty()){           
+            while(!aux.isEmpty()){
                 push(aux.pop());
             }
-        } catch (StackException ex) {
-                System.out.println(ex.getMessage());
+
+        }catch (StackException ex){
+            System.out.println(ex.getMessage());
         }
+
+
         return result;
     }
     

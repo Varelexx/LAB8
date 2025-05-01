@@ -9,8 +9,7 @@ package domain.queue;
  * @author Profesor Lic. Gilberth Chaves A.
  * Cola con arreglos
  */
-public class
-ArrayQueue implements Queue{
+public class ArrayQueue implements Queue{
     //Atributos
     private int n; //el tam max de la cola
     private Object queue[]; //arreglo de objetos
@@ -90,7 +89,7 @@ ArrayQueue implements Queue{
         queue[rear] = element;
         front--; //la idea es q anterior quede en un campo vacio
     }
-    
+
     @Override
     public void enQueue(Object element, Integer priority) throws QueueException {
         if(size()==queue.length){

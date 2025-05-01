@@ -1,22 +1,17 @@
 package domain;
 
 public class Person {
-    public  int id;
     public String name;
-    public  int age;
+    public String mood; //alegre,triste,enojao
+    public  int attentionTime;//expresado en milisegundos
 
-    public Person(int id, String name, int age) {
-        this.id = id;
+    public Person(String name, String mood, int attentionTime) {
         this.name = name;
-        this.age = age;
+        this.mood = mood;
+        this.attentionTime = attentionTime;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Person(String name) {
+        this.name = name;
     }
 
     public String getName() {
@@ -27,20 +22,28 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getMood() {
+        return mood;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+
+    public int getAttentionTime() {
+        return attentionTime;
+    }
+
+    public void setAttentionTime(int attentionTime) {
+        this.attentionTime = attentionTime;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
+                "name='" + name + '\'' +
+                ", mood='" + mood + '\'' +
+                ", attentionTime=" + attentionTime +
                 '}';
     }
 }

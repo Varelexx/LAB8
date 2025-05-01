@@ -77,23 +77,23 @@ public class ArrayStack implements Stack {
     
     @Override
     public String toString() {
-        if(isEmpty()) return "Array Stack is Empty";
-        String result = "\nArray Stack Content";
+       if (isEmpty()) return "Array Stack is Empty";
+        String result="Array Stack Conten:\n";
         try {
             ArrayStack aux = new ArrayStack(size());
-            while(!isEmpty()){           
-                    result+="\n"+peek();
-                    aux.push(pop());
+            while (!isEmpty()){
+                result+=peek()+"\n";
+                aux.push(pop());
             }
-            
-            //dejamos la pila como al inicio
-            while(!aux.isEmpty()){           
+            while(!aux.isEmpty()){
                 push(aux.pop());
             }
-        } catch (StackException ex) {
-                System.out.println(ex.getMessage());
+
+        }catch (StackException ex){
+            System.out.println(ex.getMessage());
         }
-        
+
+
         return result;
     }
 
