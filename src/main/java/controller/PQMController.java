@@ -33,12 +33,12 @@ public class PQMController {
     @javafx.fxml.FXML
     public void initialize() {
         priorityQueue = new PriorityLinkedQueue();
-        cbox_priority = new ComboBox<>();
-        cbox_mood = new ComboBox<>();
 
         cbox_priority.getItems().addAll("Low", "Medium", "High");
         cbox_mood.getItems().addAll("Happiness", "Sadness", "Anger", "Sickness", "Cheerful",
                 "Reflective", "Gloomy", "Romantic", "Calm", "Hopeful", "Fearful", "Tense", "Lonely");
+
+
         }
 
         private void refreshTableView() {
@@ -49,9 +49,18 @@ public class PQMController {
     public void OnActionenqueue(ActionEvent actionEvent) {
         String name = txf_name.getText();
         String mood = cbox_mood.getValue();
-        int priority = Integer.parseInt(cbox_priority.getValue());
+        String priorityStr = cbox_priority.getValue(); // Obtener el valor como String ("Low", "Medium", "High")
 
-        if (name != null && !name.isEmpty() && mood != null) {
+        if (name != null && !name.isEmpty() && mood != null && priorityStr != null) {
+            // Convertir "Low", "Medium", "High" a 0, 1, 2
+            int priority;
+            switch (priorityStr) {
+                case "Low" -> priority = 0;
+                case "Medium" -> priority = 1;
+                case "High" -> priority = 2;
+                default -> throw new IllegalArgumentException("Prioridad no válida: " + priorityStr);
+            }
+
             int attentionTime = Utility.getAttentionTime();
             Person person = new Person(name, mood, attentionTime);
 
@@ -62,6 +71,7 @@ public class PQMController {
                 e.printStackTrace();
             }
         }
+        System.out.println(priorityQueue);
     }
 
     @javafx.fxml.FXML

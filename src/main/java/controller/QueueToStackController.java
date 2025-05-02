@@ -1,8 +1,10 @@
 package controller;
 
 import domain.*;
-import domain.Stack.LinkedStack;
-import domain.Stack.StackException;
+import domain.queue.LinkedQueue;
+import domain.queue.QueueException;
+import domain.stack.LinkedStack;
+import domain.stack.StackException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,7 +40,7 @@ public class QueueToStackController
 
         TableColumn<Climate, String> weatherColumnQueue = new TableColumn<>("Weather");
         weatherColumnQueue.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
+                new SimpleStringProperty(data.getValue().getWeather().getName()));
 
         tv_queue.getColumns().addAll(placeColumnQueue, weatherColumnQueue);
         tv_queue.setItems(climateList);
@@ -50,7 +52,7 @@ public class QueueToStackController
 
         TableColumn<Climate, String> weatherColumnStack = new TableColumn<>("Weather");
         weatherColumnStack.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
+                new SimpleStringProperty(data.getValue().getWeather().getName()));
 
         tv_stack.getColumns().addAll(placeColumnStack, weatherColumnStack);
         tv_stack.setItems(emptyClimateList);
@@ -92,7 +94,7 @@ public class QueueToStackController
         Climate climate = new Climate(place, weather);
         for (Climate c : climateList) {
             if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                    c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
+                    c.getWeather().getName().equalsIgnoreCase(weatherType)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -112,7 +114,7 @@ public class QueueToStackController
     }
 
     @javafx.fxml.FXML
-    public void ToOnAction(ActionEvent actionEvent) throws StackException {
+    public void ToOnAction(ActionEvent actionEvent) throws StackException, QueueException {
         //de Queue a Stack
         if (!climateQueue.isEmpty()) {
             while (!climateQueue.isEmpty()) {
@@ -149,7 +151,7 @@ public class QueueToStackController
             boolean duplicated = false;
             for (Climate c : climateList) {
                 if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                        c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
+                        c.getWeather().getName().equalsIgnoreCase(weatherType)) {
                     duplicated = true;
                     break;
                 }

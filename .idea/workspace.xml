@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="PQMController (Con fallos)" />
+    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,25 +22,12 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Kimaru17&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Varelexx/LAB8.git&quot;,
-    &quot;accountId&quot;: &quot;c5cf67b0-000b-4e96-9a9e-55ae391ee631&quot;
-  }
-}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -45,7 +39,6 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
-    "JUnit.ArrayQueueTest.executor": "Run",
     "JUnit.ArrayQueueTest.test.executor": "Run",
     "JUnit.ArrayStackTest.executor": "Run",
     "JUnit.ArrayStackTest.test.executor": "Run",
@@ -58,7 +51,6 @@
     "JUnit.LinkedStackTest.executor": "Debug",
     "JUnit.LinkedStackTest.infixToPostfixText.executor": "Run",
     "JUnit.LinkedStackTest.test.executor": "Run",
-    "JUnit.PriorityLinkedQueueTest.executor": "Run",
     "JUnit.PriorityLinkedQueueTest.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -66,7 +58,6 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Varela/Desktop/LAB8",
     "node.js.detected.package.eslint": "true",
@@ -176,6 +167,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -186,23 +185,10 @@
       <updated>1715642371023</updated>
       <workItem from="1746071076339" duration="7389000" />
     </task>
-    <task id="LOCAL-00001" summary="PQMController (Con fallos)">
-      <option name="closed" value="true" />
-      <created>1746221732062</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1746221732062</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="PQMController (Con fallos)" />
-    <option name="LAST_COMMIT_MESSAGE" value="PQMController (Con fallos)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

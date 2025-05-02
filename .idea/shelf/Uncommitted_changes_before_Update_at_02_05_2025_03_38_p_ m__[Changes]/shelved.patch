@@ -1,0 +1,179 @@
+Index: src/test/java/domain/queue/HeaderLinkedQueueTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domain.queue;\r\n\r\nimport domain.Climate;\r\nimport domain.Place;\r\nimport domain.Weather;\r\nimport org.junit.jupiter.api.Test;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\n\r\nclass HeaderLinkedQueueTest {\r\n\r\n    @Test\r\n   void test(){\r\n        HeaderLinkedQueue q1= new HeaderLinkedQueue();\r\n        HeaderLinkedQueue q2= new HeaderLinkedQueue();\r\n        HeaderLinkedQueue q3= new HeaderLinkedQueue();\r\n        try {\r\n            for (int i = 0; i < 20; i++) {\r\n                q1.enQueue( new Climate(new Place(util.Utility.getPlace()),new Weather(util.Utility.getWeather())));\r\n\r\n            }\r\n            System.out.println(q1);\r\n            System.out.println(\"\\n Desencolar Sunny y Foggy\");\r\n            deQueeByTime(q1,q2,\"sunny\");\r\n            deQueeByTime(q1,q2,\"foggy\");\r\n            System.out.println(\"Q2 con Sunny y Fuggy\"+q2);\r\n            System.out.println(\"\\n---------------------\\n\");\r\n            System.out.println(\"Q1 Sin Sunny y Fuggy\"+q1);\r\n            System.out.println(\"\\n Desencolar Lugares Paraíso y Liberia\");\r\n            deQueeByPlace(q1,q3,\"Liberia\");\r\n            deQueeByPlace(q1,q3,\"Paraíso\");\r\n            System.out.println(\"Q1 Sin Paraiso y Liberia\"+q1);\r\n            System.out.println(\"\\n---------------------\\n\");\r\n            System.out.println(\"Q3 agregando Paraiso y Liberia\"+q3);\r\n\r\n            System.out.println(\"\\n Desencolar clima Thunderstom\\n\");\r\n\r\n            deQueeByTime2(q1,q2,q3,\"thunderstorm\");\r\n            System.out.println(\"Q1 Despues de desencolar Thunderstom\\n\"+q1);\r\n            System.out.println(\"\\n---------------------\\n\");\r\n            System.out.println(\"Q2 Agregando Thunderstorm\\n\"+q2);\r\n            System.out.println(\"\\n---------------------\\n\");\r\n            System.out.println(\"Q3 Agregando Thunderstorm\\n\"+q3);\r\n\r\n\r\n\r\n\r\n        }catch (QueueException e){\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    private HeaderLinkedQueue deQueeByTime(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {\r\n\r\n        HeaderLinkedQueue aux = new HeaderLinkedQueue();\r\n        while (!li.isEmpty()){\r\n                Climate c = (Climate) li.front();\r\n                Weather w = c.getWeather();\r\n                if(w.getName().equals(m)){\r\n                    res.enQueue(li.front());\r\n                    li.deQueue();\r\n                }else {\r\n                    aux.enQueue(li.deQueue());\r\n                }\r\n\r\n            }\r\n        while (!aux.isEmpty()){\r\n            li.enQueue(aux.deQueue());\r\n        }\r\n\r\n\r\n        return res;\r\n    }\r\n\r\n    private void deQueeByTime2(HeaderLinkedQueue li,HeaderLinkedQueue res,HeaderLinkedQueue res2,String m) throws QueueException {\r\n\r\n        HeaderLinkedQueue aux = new HeaderLinkedQueue();\r\n\r\n            while (!li.isEmpty()){\r\n                Climate c = (Climate) li.front();\r\n                Weather w = c.getWeather();\r\n                if(w.getName().equals(m)){\r\n                    res.enQueue(li.front());\r\n                    res2.enQueue(li.front());\r\n                    li.deQueue();\r\n                }else {\r\n                    aux.enQueue(li.deQueue());\r\n                }\r\n\r\n            }\r\n            while (!aux.isEmpty()){\r\n                li.enQueue(aux.deQueue());\r\n            }\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n    private void deQueeByPlace(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {\r\n\r\n        HeaderLinkedQueue aux = new HeaderLinkedQueue();\r\n\r\n            while (!li.isEmpty()){\r\n                Climate c = (Climate) li.front();\r\n                Place p = c.getPlace();\r\n                if(p.getName().equals(m)){\r\n                    res.enQueue(li.front());\r\n                    li.deQueue();\r\n                }else {\r\n                    aux.enQueue(li.deQueue());\r\n                }\r\n\r\n            }\r\n            while (!aux.isEmpty()){\r\n                li.enQueue(aux.deQueue());\r\n            }\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    void test1() {\r\n\r\n        HeaderLinkedQueue he = new HeaderLinkedQueue();\r\n        try {\r\n            for (int i = 0; i < 15; i++)\r\n                he.enQueue(util.Utility.getRandom(30));\r\n            System.out.println(he);\r\n\r\n        }catch (QueueException e){\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/domain/queue/HeaderLinkedQueueTest.java b/src/test/java/domain/queue/HeaderLinkedQueueTest.java
+--- a/src/test/java/domain/queue/HeaderLinkedQueueTest.java	(revision d1170a0103813231f792fada9962750494a05453)
++++ b/src/test/java/domain/queue/HeaderLinkedQueueTest.java	(date 1746079896066)
+@@ -50,7 +50,7 @@
+         }
+     }
+ 
+-    private HeaderLinkedQueue deQueeByTime(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {
++    private void deQueeByTime(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {
+ 
+         HeaderLinkedQueue aux = new HeaderLinkedQueue();
+         while (!li.isEmpty()){
+@@ -69,7 +69,6 @@
+         }
+ 
+ 
+-        return res;
+     }
+ 
+     private void deQueeByTime2(HeaderLinkedQueue li,HeaderLinkedQueue res,HeaderLinkedQueue res2,String m) throws QueueException {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"17f003db-1828-4935-bea6-2ff7fda7984c\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/.gitignore\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/vcs.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/Person.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/Person.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/queue/Node.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/queue/Node.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/util/Utility.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/util/Utility.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/domain/MessageTest.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/domain/queue/MessageTest.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/domain/stack/StackTest.java\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"JUnit5 Test Class\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2gQuxZqAc4Rmm3Ynf99hO2DtcDq\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"JUnit.ArrayQueueTest.test.executor\": \"Run\",\r\n    \"JUnit.ArrayStackTest.executor\": \"Run\",\r\n    \"JUnit.ArrayStackTest.test.executor\": \"Run\",\r\n    \"JUnit.HeaderLinkedQueueTest.test.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.getFront.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.reverseLastK.executor\": \"Debug\",\r\n    \"JUnit.LinkedQueueTest.test1.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.test3.executor\": \"Run\",\r\n    \"JUnit.LinkedStackTest.executor\": \"Debug\",\r\n    \"JUnit.LinkedStackTest.infixToPostfixText.executor\": \"Run\",\r\n    \"JUnit.LinkedStackTest.test.executor\": \"Run\",\r\n    \"JUnit.PriorityLinkedQueueTest.test.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary\": \"JUnit5\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5\": \"\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Varela/Desktop/LAB8\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"domain.queue\" />\r\n      <recent name=\"domain.stack\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.LinkedQueueTest\">\r\n    <configuration name=\"ArrayQueueTest.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.ArrayQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"HeaderLinkedQueueTest.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.HeaderLinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest.test1\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test1\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest.test3\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test3\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.LinkedQueueTest\" />\r\n        <item itemvalue=\"JUnit.ArrayQueueTest.test\" />\r\n        <item itemvalue=\"JUnit.HeaderLinkedQueueTest.test\" />\r\n        <item itemvalue=\"JUnit.LinkedQueueTest.test3\" />\r\n        <item itemvalue=\"JUnit.LinkedQueueTest.test1\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"17f003db-1828-4935-bea6-2ff7fda7984c\" name=\"Changes\" comment=\"\" />\r\n      <created>1715642371023</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1715642371023</updated>\r\n      <workItem from=\"1746071076339\" duration=\"7389000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/domain/stack/ArrayStackTest.java</url>\r\n          <line>94</line>\r\n          <option name=\"timeStamp\" value=\"10\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/domain/stack/LinkedStackTest.java</url>\r\n          <line>24</line>\r\n          <option name=\"timeStamp\" value=\"11\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d1170a0103813231f792fada9962750494a05453)
++++ b/.idea/workspace.xml	(date 1746221721828)
+@@ -4,25 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Person.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/Node.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Utility.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/MessageTest.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/MessageTest.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/stack/StackTest.java" beforeDir="false" />
++    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="Cambios">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,37 +32,38 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "JUnit.ArrayQueueTest.test.executor": "Run",
+-    "JUnit.ArrayStackTest.executor": "Run",
+-    "JUnit.ArrayStackTest.test.executor": "Run",
+-    "JUnit.HeaderLinkedQueueTest.test.executor": "Run",
+-    "JUnit.LinkedQueueTest.executor": "Run",
+-    "JUnit.LinkedQueueTest.getFront.executor": "Run",
+-    "JUnit.LinkedQueueTest.reverseLastK.executor": "Debug",
+-    "JUnit.LinkedQueueTest.test1.executor": "Run",
+-    "JUnit.LinkedQueueTest.test3.executor": "Run",
+-    "JUnit.LinkedStackTest.executor": "Debug",
+-    "JUnit.LinkedStackTest.infixToPostfixText.executor": "Run",
+-    "JUnit.LinkedStackTest.test.executor": "Run",
+-    "JUnit.PriorityLinkedQueueTest.test.executor": "Run",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/Varela/Desktop/LAB8",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.ArrayQueueTest.test.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.ArrayStackTest.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.ArrayStackTest.test.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.HeaderLinkedQueueTest.test.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedQueueTest.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedQueueTest.getFront.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedQueueTest.reverseLastK.executor&quot;: &quot;Debug&quot;,
++    &quot;JUnit.LinkedQueueTest.test1.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedQueueTest.test3.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedStackTest.executor&quot;: &quot;Debug&quot;,
++    &quot;JUnit.LinkedStackTest.infixToPostfixText.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.LinkedStackTest.test.executor&quot;: &quot;Run&quot;,
++    &quot;JUnit.PriorityLinkedQueueTest.test.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/Varela/Desktop/LAB8&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CreateTestDialog.Recents.Supers">
+       <recent name="" />
+@@ -88,7 +73,7 @@
+       <recent name="domain.stack" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.LinkedQueueTest">
++  <component name="RunManager" selected="JUnit.ArrayQueueTest.test">
+     <configuration name="ArrayQueueTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="lab" />
+       <extension name="coverage">
+@@ -194,12 +179,33 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1715642371023</updated>
+-      <workItem from="1746071076339" duration="7389000" />
++      <workItem from="1746071076339" duration="8569000" />
++    </task>
++    <task id="LOCAL-00001" summary="Cambios">
++      <option name="closed" value="true" />
++      <created>1746078923601</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1746078923601</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Cambios">
++      <option name="closed" value="true" />
++      <created>1746078945230</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1746078945230</updated>
+     </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="Cambios" />
++    <option name="LAST_COMMIT_MESSAGE" value="Cambios" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

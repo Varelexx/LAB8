@@ -43,8 +43,8 @@
          </font>
       </Label>
       <TextField fx:id="txf_name" layoutX="248.0" layoutY="169.0" prefHeight="25.0" prefWidth="203.0" />
-      <ComboBox layoutX="246.0" layoutY="201.0" onAction="#cbox_mood" prefHeight="25.0" prefWidth="203.0" />
-      <ComboBox layoutX="246.0" layoutY="227.0" onAction="#cbox_priority" prefHeight="25.0" prefWidth="203.0" />
+      <ComboBox fx:id="cbox_mood" layoutX="246.0" layoutY="201.0" onAction="#cbox_mood" prefHeight="25.0" prefWidth="203.0" />
+      <ComboBox fx:id="cbox_priority" layoutX="246.0" layoutY="227.0" onAction="#cbox_priority" prefHeight="25.0" prefWidth="203.0" />
       <Button layoutX="502.0" layoutY="168.0" mnemonicParsing="false" onAction="#OnActionenqueue" text="EnQueue">
          <font>
             <Font name="Bookman Old Style" size="15.0" />

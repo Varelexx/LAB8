@@ -50,7 +50,7 @@ class HeaderLinkedQueueTest {
         }
     }
 
-    private HeaderLinkedQueue deQueeByTime(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {
+    private void deQueeByTime(HeaderLinkedQueue li,HeaderLinkedQueue res,String m) throws QueueException {
 
         HeaderLinkedQueue aux = new HeaderLinkedQueue();
         while (!li.isEmpty()){
@@ -69,7 +69,6 @@ class HeaderLinkedQueueTest {
         }
 
 
-        return res;
     }
 
     private void deQueeByTime2(HeaderLinkedQueue li,HeaderLinkedQueue res,HeaderLinkedQueue res2,String m) throws QueueException {

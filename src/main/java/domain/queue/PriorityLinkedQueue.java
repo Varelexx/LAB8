@@ -42,23 +42,19 @@ public class PriorityLinkedQueue implements Queue {
 
     @Override
     public int indexOf(Object element) throws QueueException {
-        if(isEmpty())
-            throw new QueueException("PriorityLinked Queue is Empty");
-        PriorityLinkedQueue aux = new PriorityLinkedQueue();
-        int pos1=1;
-        int pos2=-1; //si es -1 no existe
-        while(!isEmpty()){
-            if(util.Utility.compare(front(), element)==0){
-                pos2 = pos1;
+        if (isEmpty()) throw new QueueException("Priority Linked Queue is Empty");
+        int position = 1;
+        int foundIndex = -1;
+        Node current = front;
+        while (current != null) {
+            if (util.Utility.compare(current.data, element) == 0) {
+                foundIndex = position;
+                break;
             }
-            aux.enQueue(deQueue());
-            pos1++;
-        }//while
-       //al final dejamos la cola en su estado original
-        while(!aux.isEmpty()){
-            enQueue(aux.deQueue());
+            current = current.next;
+            position++;
         }
-        return pos2;
+        return foundIndex;
     }
 
     @Override
@@ -125,21 +121,15 @@ public class PriorityLinkedQueue implements Queue {
 
     @Override
     public boolean contains(Object element) throws QueueException {
-        if(isEmpty())
-            throw new QueueException("Priority Linked Queue is Empty");
-        PriorityLinkedQueue aux = new PriorityLinkedQueue();
-        boolean finded = false;
-        while(!isEmpty()){
-            if(util.Utility.compare(front(), element)==0){
-                finded = true;
+        if (isEmpty()) throw new QueueException("Priority Linked Queue is Empty");
+        Node current = front;
+        while (current != null) {
+            if (util.Utility.compare(current.data, element) == 0) {
+                return true;
             }
-            aux.enQueue(deQueue());
-        }//while
-        //al final dejamos la cola en su estado original
-        while(!aux.isEmpty()){
-            enQueue(aux.deQueue());
+            current = current.next;
         }
-        return finded;
+        return false;
     }
 
     @Override
@@ -164,22 +154,14 @@ public class PriorityLinkedQueue implements Queue {
     
     @Override
     public String toString(){
-        if(isEmpty()) return "Priority Linked Queue is Empty";
-        String result = "\nPriority Linked Queue Content:\n";
-        try {
-            PriorityLinkedQueue aux = new PriorityLinkedQueue();
-            while(!isEmpty()){
-                result+=front()+"\n";
-                aux.enQueue(deQueue());
-            }
-            //al final dejamos la cola en su estado original
-            while(!aux.isEmpty()){
-                enQueue(aux.deQueue());
-            }
-        }catch(QueueException ex){
-            System.out.println(ex.getMessage());
+        if (isEmpty()) return "Priority Linked Queue is Empty";
+        StringBuilder result = new StringBuilder("\nPriority Linked Queue Content:\n");
+        Node current = front;
+        while (current != null) {
+            result.append(current.data).append(" (Priority: ").append(current.priority).append(")\n");
+            current = current.next;
         }
-        return result;
+        return result.toString();
     }
 
 }
