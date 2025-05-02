@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="710.0" prefWidth="854.0" style="-fx-background-color: #7fb995;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PQMController">
+   <children>
+      <Pane prefHeight="71.0" prefWidth="854.0" style="-fx-background-color: #f06539;">
+         <children>
+            <Label layoutX="208.0" layoutY="17.0" text="Priority Queue Management" textFill="WHITE">
+               <font>
+                  <Font name="Bookman Old Style Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="301.0" layoutY="107.0" text="Admission Process">
+         <font>
+            <Font name="Bookman Old Style Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="168.0" layoutY="173.0" text="Name:">
+         <font>
+            <Font name="Bookman Old Style Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="167.0" layoutY="204.0" text="Mood:">
+         <font>
+            <Font name="Bookman Old Style Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="150.0" layoutY="231.0" text="Priority:">
+         <font>
+            <Font name="Bookman Old Style Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txf_name" layoutX="248.0" layoutY="169.0" prefHeight="25.0" prefWidth="203.0" />
+      <ComboBox layoutX="246.0" layoutY="201.0" onAction="#cbox_mood" prefHeight="25.0" prefWidth="203.0" />
+      <ComboBox layoutX="246.0" layoutY="227.0" onAction="#cbox_priority" prefHeight="25.0" prefWidth="203.0" />
+      <Button layoutX="502.0" layoutY="168.0" mnemonicParsing="false" onAction="#OnActionenqueue" text="EnQueue">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="502.0" layoutY="211.0" mnemonicParsing="false" onAction="#OnActionClear" prefHeight="29.0" prefWidth="89.0" text="Clear">
+         <font>
+            <Font name="Bookman Old Style" size="15.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tbv_personData" layoutX="15.0" layoutY="300.0" prefHeight="309.0" prefWidth="390.0">
+        <columns>
+          <TableColumn fx:id="tbc_name" prefWidth="96.00003242492676" text="Name" />
+          <TableColumn fx:id="tbc_mood" prefWidth="91.33333587646484" text="Mood" />
+            <TableColumn fx:id="tbc_atentionTime" prefWidth="105.33335876464844" text="Atention Time" />
+            <TableColumn fx:id="tbc_priority" prefWidth="96.0" text="Priority" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="txa_attetntionprocess" layoutX="440.0" layoutY="300.0" prefHeight="309.0" prefWidth="390.0" promptText="Attention Process" />
+      <Button layoutX="440.0" layoutY="653.0" mnemonicParsing="false" onAction="#OnActionattentionProcess" text="Attention Process">
+         <font>
+            <Font name="Bookman Old Style" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="251.0" layoutY="653.0" mnemonicParsing="false" onAction="#OnActionautoEnqueue" text="Auto EnQueue">
+         <font>
+            <Font name="Bookman Old Style" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

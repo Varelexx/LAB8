@@ -5,24 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/ArrayQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/HeaderLinkedQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/LinkedQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/stack/ArrayStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/stack/LinkedStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Utility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/MessageTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MessengerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MessageTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/MessageTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/stack/StackTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +21,25 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Kimaru17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Varelexx/LAB8.git&quot;,
+    &quot;accountId&quot;: &quot;c5cf67b0-000b-4e96-9a9e-55ae391ee631&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -50,6 +50,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "JUnit.ArrayQueueTest.executor": "Run",
     "JUnit.ArrayQueueTest.test.executor": "Run",
     "JUnit.ArrayStackTest.executor": "Run",
     "JUnit.ArrayStackTest.test.executor": "Run",
@@ -62,6 +64,7 @@
     "JUnit.LinkedStackTest.executor": "Debug",
     "JUnit.LinkedStackTest.infixToPostfixText.executor": "Run",
     "JUnit.LinkedStackTest.test.executor": "Run",
+    "JUnit.PriorityLinkedQueueTest.executor": "Run",
     "JUnit.PriorityLinkedQueueTest.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -69,6 +72,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Varela/Desktop/LAB8",
     "node.js.detected.package.eslint": "true",
@@ -88,7 +92,7 @@
       <recent name="domain.stack" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LinkedQueueTest">
+  <component name="RunManager">
     <configuration name="ArrayQueueTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="lab" />
       <extension name="coverage">
@@ -177,14 +181,6 @@
         <item itemvalue="JUnit.LinkedQueueTest.test1" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

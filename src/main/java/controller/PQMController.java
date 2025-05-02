@@ -1,0 +1,120 @@
+package controller;
+
+import domain.Person;
+import domain.queue.PriorityLinkedQueue;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+import util.Utility;
+
+public class PQMController {
+
+    @javafx.fxml.FXML
+    private TableColumn<Person, String> tbc_priority;
+    @javafx.fxml.FXML
+    private TableView<Person> tbv_personData;
+    @javafx.fxml.FXML
+    private TableColumn<Person, Integer> tbc_atentionTime;
+    @javafx.fxml.FXML
+    private TextArea txa_attetntionprocess;
+    @javafx.fxml.FXML
+    private TextField txf_name;
+    @javafx.fxml.FXML
+    private TableColumn<Person, String> tbc_mood;
+    @javafx.fxml.FXML
+    private TableColumn<Person, String> tbc_name;
+    @javafx.fxml.FXML
+    private ComboBox<String> cbox_priority;
+    @javafx.fxml.FXML
+    private ComboBox<String> cbox_mood;
+
+    private PriorityLinkedQueue priorityQueue;
+
+    @javafx.fxml.FXML
+    public void initialize() {
+        priorityQueue = new PriorityLinkedQueue();
+        cbox_priority = new ComboBox<>();
+        cbox_mood = new ComboBox<>();
+
+        cbox_priority.getItems().addAll("Low", "Medium", "High");
+        cbox_mood.getItems().addAll("Happiness", "Sadness", "Anger", "Sickness", "Cheerful",
+                "Reflective", "Gloomy", "Romantic", "Calm", "Hopeful", "Fearful", "Tense", "Lonely");
+        }
+
+        private void refreshTableView() {
+//       tbv_personData.getItems().setAll(priorityQueue.(new Person[0]));
+        }
+
+    @javafx.fxml.FXML
+    public void OnActionenqueue(ActionEvent actionEvent) {
+        String name = txf_name.getText();
+        String mood = cbox_mood.getValue();
+        int priority = Integer.parseInt(cbox_priority.getValue());
+
+        if (name != null && !name.isEmpty() && mood != null) {
+            int attentionTime = Utility.getAttentionTime();
+            Person person = new Person(name, mood, attentionTime);
+
+            try {
+                priorityQueue.enQueue(person, priority);
+                refreshTableView();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @javafx.fxml.FXML
+    public void OnActionautoEnqueue(ActionEvent actionEvent) {
+        for (int i = 0; i < 20; i++) {
+            String name = Utility.getName();
+            String mood = Utility.getMood();
+            int priority = Utility.getRandom(3);
+            int attentionTime = Utility.getAttentionTime();
+
+            Person person = new Person(name, mood, attentionTime);
+
+            try {
+                if (!priorityQueue.contains(person)) {
+                    priorityQueue.enQueue(person, priority);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        refreshTableView();
+    }
+
+    @javafx.fxml.FXML
+    public void OnActionattentionProcess(ActionEvent actionEvent) {
+        try {
+            if (!priorityQueue.isEmpty()) {
+                Person person = (Person) priorityQueue.deQueue();
+                txa_attetntionprocess.appendText("Atendiendo a " + person.getName()
+                        + " con estado de ánimo: " + person.getMood()
+                        + " y tiempo de atención: " + person.getAttentionTime() + "ms\n");
+                refreshTableView();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @javafx.fxml.FXML
+    public void OnActionClear(ActionEvent actionEvent) {
+        txf_name.clear();
+        cbox_priority.setValue(null);
+        cbox_mood.setValue(null);
+        txa_attetntionprocess.clear();
+        priorityQueue.clear();
+        refreshTableView();
+    }
+
+    @javafx.fxml.FXML
+    public void cbox_priority(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void cbox_mood(ActionEvent actionEvent) {
+    }
+}
