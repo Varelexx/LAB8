@@ -4,6 +4,7 @@ public class Person {
     public String name;
     public String mood; //alegre,triste,enojao
     public  int attentionTime;//expresado en milisegundos
+    private int priority;
 
     public Person(String name, String mood, int attentionTime) {
         this.name = name;
@@ -12,6 +13,13 @@ public class Person {
     }
     public Person(String name) {
         this.name = name;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public String getName() {

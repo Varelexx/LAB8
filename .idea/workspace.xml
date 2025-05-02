@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="">
+    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="PQM">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/queue/PriorityLinkedQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/domain/queue/HeaderLinkedQueueTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Person.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +62,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -185,10 +183,23 @@
       <updated>1715642371023</updated>
       <workItem from="1746071076339" duration="7389000" />
     </task>
+    <task id="LOCAL-00001" summary="PQM">
+      <option name="closed" value="true" />
+      <created>1746223965184</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746223965184</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="PQM" />
+    <option name="LAST_COMMIT_MESSAGE" value="PQM" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

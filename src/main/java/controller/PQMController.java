@@ -2,6 +2,8 @@ package controller;
 
 import domain.Person;
 import domain.queue.PriorityLinkedQueue;
+import domain.queue.QueueException;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -34,6 +36,22 @@ public class PQMController {
     public void initialize() {
         priorityQueue = new PriorityLinkedQueue();
 
+        tbc_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tbc_mood.setCellValueFactory(new PropertyValueFactory<>("mood"));
+        tbc_atentionTime.setCellValueFactory(new PropertyValueFactory<>("attentionTime"));
+
+        tbc_priority.setCellValueFactory(cellData -> {
+            int priority = cellData.getValue().getPriority();
+            String priorityText = switch (priority) {
+                case 0 -> "Low";
+                case 1 -> "Medium";
+                case 2 -> "High";
+                default -> "Unknown";
+            };
+            return new SimpleStringProperty(priorityText);
+        });
+
+
         cbox_priority.getItems().addAll("Low", "Medium", "High");
         cbox_mood.getItems().addAll("Happiness", "Sadness", "Anger", "Sickness", "Cheerful",
                 "Reflective", "Gloomy", "Romantic", "Calm", "Hopeful", "Fearful", "Tense", "Lonely");
@@ -41,9 +59,18 @@ public class PQMController {
 
         }
 
-        private void refreshTableView() {
-//       tbv_personData.getItems().setAll(priorityQueue.(new Person[0]));
+    private void refreshTableView() {
+        // Limpiar la tabla
+        tbv_personData.getItems().clear();
+
+        // Obtener el primer nodo de la cola
+        domain.queue.Node current = priorityQueue.getFront();
+        while (current != null) {
+            // Agregar el dato del nodo (Person) directamente al TableView
+            tbv_personData.getItems().add((Person) current.data);
+            current = current.next;
         }
+    }
 
     @javafx.fxml.FXML
     public void OnActionenqueue(ActionEvent actionEvent) {
@@ -63,6 +90,7 @@ public class PQMController {
 
             int attentionTime = Utility.getAttentionTime();
             Person person = new Person(name, mood, attentionTime);
+            person.setPriority(priority);
 
             try {
                 priorityQueue.enQueue(person, priority);
