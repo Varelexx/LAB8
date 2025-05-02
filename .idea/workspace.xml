@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MessengerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MessageTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/domain/queue/MessageTest.java" beforeDir="false" />
-    </list>
+    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="PQMController (Con fallos)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -192,10 +186,23 @@
       <updated>1715642371023</updated>
       <workItem from="1746071076339" duration="7389000" />
     </task>
+    <task id="LOCAL-00001" summary="PQMController (Con fallos)">
+      <option name="closed" value="true" />
+      <created>1746221732062</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746221732062</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="PQMController (Con fallos)" />
+    <option name="LAST_COMMIT_MESSAGE" value="PQMController (Con fallos)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
