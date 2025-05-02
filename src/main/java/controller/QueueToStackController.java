@@ -1,10 +1,8 @@
 package controller;
 
 import domain.*;
-import domain.queue.LinkedQueue;
-import domain.queue.QueueException;
-import domain.stack.LinkedStack;
-import domain.stack.StackException;
+import domain.Stack.LinkedStack;
+import domain.Stack.StackException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +23,8 @@ public class QueueToStackController
     private LinkedQueue climateQueue = new LinkedQueue();
     private ObservableList<Climate> climateList = FXCollections.observableArrayList();
     private ObservableList<Climate> emptyClimateList = FXCollections.observableArrayList();
+    @javafx.fxml.FXML
+    private Button btn_to;
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -32,6 +32,7 @@ public class QueueToStackController
                 "rainy", "thunderstorm", "sunny", "cloudy", "foggy"
         );
         cb_weather.setItems(options);
+        btn_to.setDisable(true);
 
         // columnas para tv_queue
         TableColumn<Climate, String> placeColumnQueue = new TableColumn<>("Place");
@@ -40,7 +41,7 @@ public class QueueToStackController
 
         TableColumn<Climate, String> weatherColumnQueue = new TableColumn<>("Weather");
         weatherColumnQueue.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getName()));
+                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
 
         tv_queue.getColumns().addAll(placeColumnQueue, weatherColumnQueue);
         tv_queue.setItems(climateList);
@@ -52,7 +53,7 @@ public class QueueToStackController
 
         TableColumn<Climate, String> weatherColumnStack = new TableColumn<>("Weather");
         weatherColumnStack.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getName()));
+                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
 
         tv_stack.getColumns().addAll(placeColumnStack, weatherColumnStack);
         tv_stack.setItems(emptyClimateList);
@@ -67,6 +68,7 @@ public class QueueToStackController
 
     @javafx.fxml.FXML
     public void EnQueueOnAction(ActionEvent actionEvent) {
+        btn_to.setDisable(false);
         //validacion para no meter valores en la pila
         if (!climateStack.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -94,7 +96,7 @@ public class QueueToStackController
         Climate climate = new Climate(place, weather);
         for (Climate c : climateList) {
             if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                    c.getWeather().getName().equalsIgnoreCase(weatherType)) {
+                    c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -114,18 +116,22 @@ public class QueueToStackController
     }
 
     @javafx.fxml.FXML
-    public void ToOnAction(ActionEvent actionEvent) throws StackException, QueueException {
+    public void ToOnAction(ActionEvent actionEvent) throws StackException {
+        climateList.clear();
         //de Queue a Stack
         if (!climateQueue.isEmpty()) {
             while (!climateQueue.isEmpty()) {
                 climateStack.push(climateQueue.deQueue());
+                climateList.add((Climate) climateStack.peek());
             }
             tv_queue.setItems(emptyClimateList);
             tv_stack.setItems(climateList);
         }else //de Stack a Queue
         {
             while (!climateStack.isEmpty()) {
-                climateQueue.enQueue(climateStack.pop());
+                Climate temp = (Climate) climateStack.pop();
+                climateQueue.enQueue(temp);
+                climateList.add(temp);
             }
             tv_queue.setItems(climateList);
             tv_stack.setItems(emptyClimateList);
@@ -134,6 +140,7 @@ public class QueueToStackController
 
     @javafx.fxml.FXML
     public void AutoEnQueueOnAction(ActionEvent actionEvent) {
+        btn_to.setDisable(false);
         //validacion para no meter valores en la pila
         if (!climateStack.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -151,7 +158,7 @@ public class QueueToStackController
             boolean duplicated = false;
             for (Climate c : climateList) {
                 if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                        c.getWeather().getName().equalsIgnoreCase(weatherType)) {
+                        c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
                     duplicated = true;
                     break;
                 }
