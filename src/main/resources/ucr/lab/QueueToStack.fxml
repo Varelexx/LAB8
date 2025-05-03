@@ -9,60 +9,60 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="699.0" prefWidth="662.0" style="-fx-background-color: #e0fad2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QueueToStackController">
-   <Pane prefHeight="108.0" prefWidth="679.0" style="-fx-background-color: #99bb87;">
+<AnchorPane prefHeight="710.0" prefWidth="854.0" style="-fx-background-color: #e0fad2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QueueToStackController">
+   <Pane prefHeight="108.0" prefWidth="854.0" style="-fx-background-color: #99bb87;">
       <children>
-         <Label layoutX="71.0" layoutY="36.0" prefHeight="36.0" prefWidth="537.0" text="Queue to Stack / Stack to Queue">
+         <Label layoutX="159.0" layoutY="36.0" prefHeight="36.0" prefWidth="537.0" text="Queue to Stack / Stack to Queue">
             <font>
                <Font name="Bookman Old Style Bold" size="29.0" />
             </font>
          </Label>
       </children>
    </Pane>
-   <Pane layoutY="108.0" prefHeight="194.0" prefWidth="679.0" style="-fx-background-color: #82e193;">
+   <Pane layoutY="108.0" prefHeight="194.0" prefWidth="854.0" style="-fx-background-color: #82e193;">
       <children>
-         <Button layoutX="463.0" layoutY="44.0" mnemonicParsing="false" onAction="#EnQueueOnAction" prefHeight="36.0" prefWidth="101.0" text="EnQueue" />
-         <Button layoutX="463.0" layoutY="117.0" mnemonicParsing="false" onAction="#ClearOnAction" prefHeight="36.0" prefWidth="101.0" text="Clear" />
-         <TextField fx:id="tf_place" layoutX="214.0" layoutY="44.0" prefHeight="36.0" prefWidth="215.0" />
-         <Label layoutX="134.0" layoutY="51.0" text="Place:">
+         <Button layoutX="556.0" layoutY="43.0" mnemonicParsing="false" onAction="#EnQueueOnAction" prefHeight="36.0" prefWidth="101.0" text="EnQueue" />
+         <Button layoutX="556.0" layoutY="116.0" mnemonicParsing="false" onAction="#ClearOnAction" prefHeight="36.0" prefWidth="101.0" text="Clear" />
+         <TextField fx:id="tf_place" layoutX="307.0" layoutY="43.0" prefHeight="36.0" prefWidth="215.0" />
+         <Label layoutX="227.0" layoutY="50.0" text="Place:">
             <font>
                <Font name="Bookman Old Style Bold" size="19.0" />
             </font>
          </Label>
-         <Label layoutX="105.0" layoutY="124.0" text="Weather:">
+         <Label layoutX="198.0" layoutY="123.0" text="Weather:">
             <font>
                <Font name="Bookman Old Style Bold" size="19.0" />
             </font>
          </Label>
-         <ChoiceBox fx:id="cb_weather" layoutX="214.0" layoutY="117.0" prefHeight="36.0" prefWidth="215.0" />
+         <ChoiceBox fx:id="cb_weather" layoutX="307.0" layoutY="116.0" prefHeight="36.0" prefWidth="215.0" />
       </children>
    </Pane>
-   <Pane layoutY="301.0" prefHeight="320.0" prefWidth="679.0" style="-fx-background-color: #83c261;">
+   <Pane layoutY="301.0" prefHeight="320.0" prefWidth="854.0" style="-fx-background-color: #83c261;">
       <children>
-         <TableView fx:id="tv_queue" layoutX="14.0" layoutY="50.0" prefHeight="257.0" prefWidth="246.0" />
-         <TableView fx:id="tv_stack" layoutX="417.0" layoutY="50.0" prefHeight="257.0" prefWidth="246.0" />
-         <Button fx:id="btn_to" layoutX="296.0" layoutY="124.0" mnemonicParsing="false" onAction="#ToOnAction" prefHeight="71.0" prefWidth="88.0" text="→To←">
+         <TableView fx:id="tv_queue" layoutX="71.0" layoutY="48.0" prefHeight="257.0" prefWidth="277.0" />
+         <TableView fx:id="tv_stack" layoutX="505.0" layoutY="48.0" prefHeight="257.0" prefWidth="277.0" />
+         <Button fx:id="btn_to" layoutX="384.0" layoutY="122.0" mnemonicParsing="false" onAction="#ToOnAction" prefHeight="71.0" prefWidth="88.0" text="→To←">
             <font>
                <Font name="System Bold" size="19.0" />
             </font>
          </Button>
-         <Label layoutX="106.0" layoutY="18.0" text="Queue">
+         <Label layoutX="194.0" layoutY="16.0" text="Queue">
             <font>
                <Font name="Bookman Old Style Bold" size="19.0" />
             </font>
          </Label>
-         <Label layoutX="512.0" layoutY="18.0" text="Stack">
+         <Label layoutX="600.0" layoutY="16.0" text="Stack">
             <font>
                <Font name="Bookman Old Style Bold" size="19.0" />
             </font>
          </Label>
       </children>
    </Pane>
-   <Pane layoutY="619.0" prefHeight="81.0" prefWidth="679.0" style="-fx-background-color: #99bb87;">
+   <Pane layoutY="621.0" prefHeight="91.0" prefWidth="854.0" style="-fx-background-color: #99bb87;">
       <children>
-         <Button layoutX="268.0" layoutY="17.0" mnemonicParsing="false" onAction="#AutoEnQueueOnAction" prefHeight="47.0" prefWidth="143.0" text="Auto EnQueue">
+         <Button layoutX="356.0" layoutY="14.0" mnemonicParsing="false" onAction="#AutoEnQueueOnAction" prefHeight="47.0" prefWidth="143.0" text="Auto EnQueue">
             <font>
-               <Font size="17.0" />
+               <Font name="Bookman Old Style" size="15.0" />
             </font>
          </Button>
       </children>

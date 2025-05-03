@@ -1,0 +1,266 @@
+Index: src/main/java/controller/PQMController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport domain.Person;\r\nimport domain.queue.PriorityLinkedQueue;\r\nimport javafx.beans.property.SimpleStringProperty;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.scene.control.*;\r\nimport util.Utility;\r\n\r\npublic class PQMController {\r\n\r\n    @javafx.fxml.FXML\r\n    private TableColumn<Person, String> tbc_priority;\r\n    @javafx.fxml.FXML\r\n    private TableView<Person> tbv_personData;\r\n    @javafx.fxml.FXML\r\n    private TableColumn<Person, Integer> tbc_atentionTime;\r\n    @javafx.fxml.FXML\r\n    private TextArea txa_attetntionprocess;\r\n    @javafx.fxml.FXML\r\n    private TextField txf_name;\r\n    @javafx.fxml.FXML\r\n    private TableColumn<Person, String> tbc_mood;\r\n    @javafx.fxml.FXML\r\n    private TableColumn<Person, String> tbc_name;\r\n    @javafx.fxml.FXML\r\n    private ComboBox<String> cbox_priority;\r\n    @javafx.fxml.FXML\r\n    private ComboBox<String> cbox_mood;\r\n\r\n    private PriorityLinkedQueue priorityQueue;\r\n\r\n    @javafx.fxml.FXML\r\n    public void initialize() {\r\n        priorityQueue = new PriorityLinkedQueue();\r\n        cbox_priority = new ComboBox<>();\r\n        cbox_mood = new ComboBox<>();\r\n\r\n        cbox_priority.getItems().addAll(\"Low\", \"Medium\", \"High\");\r\n        cbox_mood.getItems().addAll(\"Happiness\", \"Sadness\", \"Anger\", \"Sickness\", \"Cheerful\",\r\n                \"Reflective\", \"Gloomy\", \"Romantic\", \"Calm\", \"Hopeful\", \"Fearful\", \"Tense\", \"Lonely\");\r\n        }\r\n\r\n        private void refreshTableView() {\r\n//       tbv_personData.getItems().setAll(priorityQueue.(new Person[0]));\r\n        }\r\n\r\n    @javafx.fxml.FXML\r\n    public void OnActionenqueue(ActionEvent actionEvent) {\r\n        String name = txf_name.getText();\r\n        String mood = cbox_mood.getValue();\r\n        int priority = Integer.parseInt(cbox_priority.getValue());\r\n\r\n        if (name != null && !name.isEmpty() && mood != null) {\r\n            int attentionTime = Utility.getAttentionTime();\r\n            Person person = new Person(name, mood, attentionTime);\r\n\r\n            try {\r\n                priorityQueue.enQueue(person, priority);\r\n                refreshTableView();\r\n            } catch (Exception e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void OnActionautoEnqueue(ActionEvent actionEvent) {\r\n        for (int i = 0; i < 20; i++) {\r\n            String name = Utility.getName();\r\n            String mood = Utility.getMood();\r\n            int priority = Utility.getRandom(3);\r\n            int attentionTime = Utility.getAttentionTime();\r\n\r\n            Person person = new Person(name, mood, attentionTime);\r\n\r\n            try {\r\n                if (!priorityQueue.contains(person)) {\r\n                    priorityQueue.enQueue(person, priority);\r\n                }\r\n            } catch (Exception e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n        refreshTableView();\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void OnActionattentionProcess(ActionEvent actionEvent) {\r\n        try {\r\n            if (!priorityQueue.isEmpty()) {\r\n                Person person = (Person) priorityQueue.deQueue();\r\n                txa_attetntionprocess.appendText(\"Atendiendo a \" + person.getName()\r\n                        + \" con estado de ánimo: \" + person.getMood()\r\n                        + \" y tiempo de atención: \" + person.getAttentionTime() + \"ms\\n\");\r\n                refreshTableView();\r\n            }\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void OnActionClear(ActionEvent actionEvent) {\r\n        txf_name.clear();\r\n        cbox_priority.setValue(null);\r\n        cbox_mood.setValue(null);\r\n        txa_attetntionprocess.clear();\r\n        priorityQueue.clear();\r\n        refreshTableView();\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void cbox_priority(ActionEvent actionEvent) {\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void cbox_mood(ActionEvent actionEvent) {\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/controller/PQMController.java b/src/main/java/controller/PQMController.java
+--- a/src/main/java/controller/PQMController.java	(revision 83a6438670f8d62549ed58d7935e76640964791e)
++++ b/src/main/java/controller/PQMController.java	(date 1746222612487)
+@@ -4,37 +4,36 @@
+ import domain.queue.PriorityLinkedQueue;
+ import javafx.beans.property.SimpleStringProperty;
+ import javafx.event.ActionEvent;
++import javafx.fxml.FXML;
+ import javafx.scene.control.*;
+ import util.Utility;
+ 
+ public class PQMController {
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     private TableColumn<Person, String> tbc_priority;
+-    @javafx.fxml.FXML
++    @FXML
+     private TableView<Person> tbv_personData;
+-    @javafx.fxml.FXML
++    @FXML
+     private TableColumn<Person, Integer> tbc_atentionTime;
+-    @javafx.fxml.FXML
++    @FXML
+     private TextArea txa_attetntionprocess;
+-    @javafx.fxml.FXML
++    @FXML
+     private TextField txf_name;
+-    @javafx.fxml.FXML
++    @FXML
+     private TableColumn<Person, String> tbc_mood;
+-    @javafx.fxml.FXML
++    @FXML
+     private TableColumn<Person, String> tbc_name;
+-    @javafx.fxml.FXML
++    @FXML
+     private ComboBox<String> cbox_priority;
+-    @javafx.fxml.FXML
++    @FXML
+     private ComboBox<String> cbox_mood;
+ 
+     private PriorityLinkedQueue priorityQueue;
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     public void initialize() {
+         priorityQueue = new PriorityLinkedQueue();
+-        cbox_priority = new ComboBox<>();
+-        cbox_mood = new ComboBox<>();
+ 
+         cbox_priority.getItems().addAll("Low", "Medium", "High");
+         cbox_mood.getItems().addAll("Happiness", "Sadness", "Anger", "Sickness", "Cheerful",
+@@ -45,7 +44,7 @@
+ //       tbv_personData.getItems().setAll(priorityQueue.(new Person[0]));
+         }
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     public void OnActionenqueue(ActionEvent actionEvent) {
+         String name = txf_name.getText();
+         String mood = cbox_mood.getValue();
+@@ -64,7 +63,7 @@
+         }
+     }
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     public void OnActionautoEnqueue(ActionEvent actionEvent) {
+         for (int i = 0; i < 20; i++) {
+             String name = Utility.getName();
+@@ -85,7 +84,7 @@
+         refreshTableView();
+     }
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     public void OnActionattentionProcess(ActionEvent actionEvent) {
+         try {
+             if (!priorityQueue.isEmpty()) {
+@@ -100,7 +99,7 @@
+         }
+     }
+ 
+-    @javafx.fxml.FXML
++    @FXML
+     public void OnActionClear(ActionEvent actionEvent) {
+         txf_name.clear();
+         cbox_priority.setValue(null);
+@@ -110,11 +109,11 @@
+         refreshTableView();
+     }
+ 
+-    @javafx.fxml.FXML
+-    public void cbox_priority(ActionEvent actionEvent) {
++    @FXML
++    public void OnActioncbox_mood(ActionEvent actionEvent) {
+     }
+ 
+-    @javafx.fxml.FXML
+-    public void cbox_mood(ActionEvent actionEvent) {
++    @FXML
++    public void OnActioncbox_priority(ActionEvent actionEvent) {
+     }
+ }
+Index: src/main/resources/ucr/lab/PQM.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.ComboBox?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TableColumn?>\r\n<?import javafx.scene.control.TableView?>\r\n<?import javafx.scene.control.TextArea?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.layout.Pane?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane prefHeight=\"710.0\" prefWidth=\"854.0\" style=\"-fx-background-color: #7fb995;\" xmlns=\"http://javafx.com/javafx/21\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"controller.PQMController\">\r\n   <children>\r\n      <Pane prefHeight=\"71.0\" prefWidth=\"854.0\" style=\"-fx-background-color: #f06539;\">\r\n         <children>\r\n            <Label layoutX=\"208.0\" layoutY=\"17.0\" text=\"Priority Queue Management\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"Bookman Old Style Bold\" size=\"30.0\" />\r\n               </font>\r\n            </Label>\r\n         </children>\r\n      </Pane>\r\n      <Label layoutX=\"301.0\" layoutY=\"107.0\" text=\"Admission Process\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style Bold\" size=\"26.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"168.0\" layoutY=\"173.0\" text=\"Name:\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style Bold\" size=\"15.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"167.0\" layoutY=\"204.0\" text=\"Mood:\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style Bold\" size=\"15.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"150.0\" layoutY=\"231.0\" text=\"Priority:\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style Bold\" size=\"15.0\" />\r\n         </font>\r\n      </Label>\r\n      <TextField fx:id=\"txf_name\" layoutX=\"248.0\" layoutY=\"169.0\" prefHeight=\"25.0\" prefWidth=\"203.0\" />\r\n      <ComboBox layoutX=\"246.0\" layoutY=\"201.0\" onAction=\"#cbox_mood\" prefHeight=\"25.0\" prefWidth=\"203.0\" />\r\n      <ComboBox layoutX=\"246.0\" layoutY=\"227.0\" onAction=\"#cbox_priority\" prefHeight=\"25.0\" prefWidth=\"203.0\" />\r\n      <Button layoutX=\"502.0\" layoutY=\"168.0\" mnemonicParsing=\"false\" onAction=\"#OnActionenqueue\" text=\"EnQueue\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"502.0\" layoutY=\"211.0\" mnemonicParsing=\"false\" onAction=\"#OnActionClear\" prefHeight=\"29.0\" prefWidth=\"89.0\" text=\"Clear\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <TableView fx:id=\"tbv_personData\" layoutX=\"15.0\" layoutY=\"300.0\" prefHeight=\"309.0\" prefWidth=\"390.0\">\r\n        <columns>\r\n          <TableColumn fx:id=\"tbc_name\" prefWidth=\"96.00003242492676\" text=\"Name\" />\r\n          <TableColumn fx:id=\"tbc_mood\" prefWidth=\"91.33333587646484\" text=\"Mood\" />\r\n            <TableColumn fx:id=\"tbc_atentionTime\" prefWidth=\"105.33335876464844\" text=\"Atention Time\" />\r\n            <TableColumn fx:id=\"tbc_priority\" prefWidth=\"96.0\" text=\"Priority\" />\r\n        </columns>\r\n      </TableView>\r\n      <TextArea fx:id=\"txa_attetntionprocess\" layoutX=\"440.0\" layoutY=\"300.0\" prefHeight=\"309.0\" prefWidth=\"390.0\" promptText=\"Attention Process\" />\r\n      <Button layoutX=\"440.0\" layoutY=\"653.0\" mnemonicParsing=\"false\" onAction=\"#OnActionattentionProcess\" text=\"Attention Process\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style\" size=\"18.0\" />\r\n         </font>\r\n      </Button>\r\n      <Button layoutX=\"251.0\" layoutY=\"653.0\" mnemonicParsing=\"false\" onAction=\"#OnActionautoEnqueue\" text=\"Auto EnQueue\">\r\n         <font>\r\n            <Font name=\"Bookman Old Style\" size=\"18.0\" />\r\n         </font>\r\n      </Button>\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/ucr/lab/PQM.fxml b/src/main/resources/ucr/lab/PQM.fxml
+--- a/src/main/resources/ucr/lab/PQM.fxml	(revision 83a6438670f8d62549ed58d7935e76640964791e)
++++ b/src/main/resources/ucr/lab/PQM.fxml	(date 1746222582044)
+@@ -43,8 +43,8 @@
+          </font>
+       </Label>
+       <TextField fx:id="txf_name" layoutX="248.0" layoutY="169.0" prefHeight="25.0" prefWidth="203.0" />
+-      <ComboBox layoutX="246.0" layoutY="201.0" onAction="#cbox_mood" prefHeight="25.0" prefWidth="203.0" />
+-      <ComboBox layoutX="246.0" layoutY="227.0" onAction="#cbox_priority" prefHeight="25.0" prefWidth="203.0" />
++      <ComboBox fx:id="cbox_mood" layoutX="246.0" layoutY="201.0" onAction="#OnActioncbox_mood" prefHeight="25.0" prefWidth="203.0" />
++      <ComboBox fx:id="cbox_priority" layoutX="246.0" layoutY="227.0" onAction="#OnActioncbox_priority" prefHeight="25.0" prefWidth="203.0" />
+       <Button layoutX="502.0" layoutY="168.0" mnemonicParsing="false" onAction="#OnActionenqueue" text="EnQueue">
+          <font>
+             <Font name="Bookman Old Style" size="15.0" />
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"17f003db-1828-4935-bea6-2ff7fda7984c\" name=\"Changes\" comment=\"PQMController (Con fallos)\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"JUnit5 Test Class\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"FxmlFile\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Kimaru17&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Varelexx/LAB8.git&quot;,\r\n    &quot;accountId&quot;: &quot;c5cf67b0-000b-4e96-9a9e-55ae391ee631&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2gQuxZqAc4Rmm3Ynf99hO2DtcDq\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.HelloApplication.executor\": \"Run\",\r\n    \"JUnit.ArrayQueueTest.executor\": \"Run\",\r\n    \"JUnit.ArrayQueueTest.test.executor\": \"Run\",\r\n    \"JUnit.ArrayStackTest.executor\": \"Run\",\r\n    \"JUnit.ArrayStackTest.test.executor\": \"Run\",\r\n    \"JUnit.HeaderLinkedQueueTest.test.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.getFront.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.reverseLastK.executor\": \"Debug\",\r\n    \"JUnit.LinkedQueueTest.test1.executor\": \"Run\",\r\n    \"JUnit.LinkedQueueTest.test3.executor\": \"Run\",\r\n    \"JUnit.LinkedStackTest.executor\": \"Debug\",\r\n    \"JUnit.LinkedStackTest.infixToPostfixText.executor\": \"Run\",\r\n    \"JUnit.LinkedStackTest.test.executor\": \"Run\",\r\n    \"JUnit.PriorityLinkedQueueTest.executor\": \"Run\",\r\n    \"JUnit.PriorityLinkedQueueTest.test.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary\": \"JUnit5\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5\": \"\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Varela/Desktop/LAB8\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"domain.queue\" />\r\n      <recent name=\"domain.stack\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"ArrayQueueTest.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.ArrayQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"HeaderLinkedQueueTest.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.HeaderLinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest.test1\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test1\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LinkedQueueTest.test3\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"lab\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"domain.queue.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"domain.queue\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"domain.queue.LinkedQueueTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"test3\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.LinkedQueueTest\" />\r\n        <item itemvalue=\"JUnit.ArrayQueueTest.test\" />\r\n        <item itemvalue=\"JUnit.HeaderLinkedQueueTest.test\" />\r\n        <item itemvalue=\"JUnit.LinkedQueueTest.test3\" />\r\n        <item itemvalue=\"JUnit.LinkedQueueTest.test1\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"17f003db-1828-4935-bea6-2ff7fda7984c\" name=\"Changes\" comment=\"\" />\r\n      <created>1715642371023</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1715642371023</updated>\r\n      <workItem from=\"1746071076339\" duration=\"7389000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"PQMController (Con fallos)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746221732062</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746221732062</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"PQMController (Con fallos)\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"PQMController (Con fallos)\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/domain/stack/ArrayStackTest.java</url>\r\n          <line>94</line>\r\n          <option name=\"timeStamp\" value=\"10\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/domain/stack/LinkedStackTest.java</url>\r\n          <line>24</line>\r\n          <option name=\"timeStamp\" value=\"11\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 83a6438670f8d62549ed58d7935e76640964791e)
++++ b/.idea/workspace.xml	(date 1746223134029)
+@@ -4,11 +4,21 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="PQMController (Con fallos)" />
++    <list default="true" id="17f003db-1828-4935-bea6-2ff7fda7984c" name="Changes" comment="PQMController (Con fallos)">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PQMController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/QueueToStackController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ucr/lab/PQM.fxml" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="ChangesViewManager">
++    <option name="groupingKeys">
++      <option value="directory" />
++    </option>
+   </component>
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+@@ -44,7 +54,7 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
+-    "Application.HelloApplication.executor": "Run",
++    "Application.HelloApplication.executor": "Debug",
+     "JUnit.ArrayQueueTest.executor": "Run",
+     "JUnit.ArrayQueueTest.test.executor": "Run",
+     "JUnit.ArrayStackTest.executor": "Run",
+@@ -194,13 +204,22 @@
+       <option name="project" value="LOCAL" />
+       <updated>1746221732062</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="PQMController (Con fallos)">
++      <option name="closed" value="true" />
++      <created>1746221868686</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1746221868686</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+   <component name="VcsManagerConfiguration">
++    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+     <MESSAGE value="PQMController (Con fallos)" />
+     <option name="LAST_COMMIT_MESSAGE" value="PQMController (Con fallos)" />
+   </component>
+Index: src/main/java/controller/QueueToStackController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport domain.*;\r\nimport domain.Stack.LinkedStack;\r\nimport domain.Stack.StackException;\r\nimport javafx.beans.property.SimpleStringProperty;\r\nimport javafx.collections.FXCollections;\r\nimport javafx.collections.ObservableList;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.scene.control.*;\r\n\r\npublic class QueueToStackController\r\n{\r\n    @javafx.fxml.FXML\r\n    private ChoiceBox cb_weather;\r\n    @javafx.fxml.FXML\r\n    private TableView tv_stack;\r\n    @javafx.fxml.FXML\r\n    private TextField tf_place;\r\n    @javafx.fxml.FXML\r\n    private TableView tv_queue;\r\n    private LinkedStack climateStack = new LinkedStack();\r\n    private LinkedQueue climateQueue = new LinkedQueue();\r\n    private ObservableList<Climate> climateList = FXCollections.observableArrayList();\r\n    private ObservableList<Climate> emptyClimateList = FXCollections.observableArrayList();\r\n\r\n    @javafx.fxml.FXML\r\n    public void initialize() {\r\n        ObservableList<String> options = FXCollections.observableArrayList(\r\n                \"rainy\", \"thunderstorm\", \"sunny\", \"cloudy\", \"foggy\"\r\n        );\r\n        cb_weather.setItems(options);\r\n\r\n        // columnas para tv_queue\r\n        TableColumn<Climate, String> placeColumnQueue = new TableColumn<>(\"Place\");\r\n        placeColumnQueue.setCellValueFactory(data ->\r\n                new SimpleStringProperty(data.getValue().getPlace().getName()));\r\n\r\n        TableColumn<Climate, String> weatherColumnQueue = new TableColumn<>(\"Weather\");\r\n        weatherColumnQueue.setCellValueFactory(data ->\r\n                new SimpleStringProperty(data.getValue().getWeather().getDescription()));\r\n\r\n        tv_queue.getColumns().addAll(placeColumnQueue, weatherColumnQueue);\r\n        tv_queue.setItems(climateList);\r\n\r\n        // columnas para tv_stack\r\n        TableColumn<Climate, String> placeColumnStack = new TableColumn<>(\"Place\");\r\n        placeColumnStack.setCellValueFactory(data ->\r\n                new SimpleStringProperty(data.getValue().getPlace().getName()));\r\n\r\n        TableColumn<Climate, String> weatherColumnStack = new TableColumn<>(\"Weather\");\r\n        weatherColumnStack.setCellValueFactory(data ->\r\n                new SimpleStringProperty(data.getValue().getWeather().getDescription()));\r\n\r\n        tv_stack.getColumns().addAll(placeColumnStack, weatherColumnStack);\r\n        tv_stack.setItems(emptyClimateList);\r\n    }\r\n\r\n\r\n    @javafx.fxml.FXML\r\n    public void ClearOnAction(ActionEvent actionEvent) {\r\n        cb_weather.setValue(null);\r\n        tf_place.setText(\"\");\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void EnQueueOnAction(ActionEvent actionEvent) {\r\n        //validacion para no meter valores en la pila\r\n        if (!climateStack.isEmpty()){\r\n            Alert alert = new Alert(Alert.AlertType.WARNING);\r\n            alert.setTitle(\"Warning\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"You can only add in a Queue\");\r\n            alert.showAndWait();\r\n            return;\r\n        }\r\n        String placeName = tf_place.getText();\r\n        String weatherType = (String) cb_weather.getValue();\r\n\r\n        //validacion para que no falten datos\r\n        if (placeName == null || placeName.isEmpty() || weatherType == null){\r\n            Alert alert = new Alert(Alert.AlertType.WARNING);\r\n            alert.setTitle(\"Warning\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"Select a weather and enter a place\");\r\n            alert.showAndWait();\r\n            return;\r\n        }\r\n\r\n        Place place = new Place(placeName);\r\n        Weather weather = new Weather(weatherType);\r\n        Climate climate = new Climate(place, weather);\r\n        for (Climate c : climateList) {\r\n            if (c.getPlace().getName().equalsIgnoreCase(placeName) &&\r\n                    c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {\r\n                Alert alert = new Alert(Alert.AlertType.WARNING);\r\n                alert.setTitle(\"Warning\");\r\n                alert.setHeaderText(null);\r\n                alert.setContentText(\"There is a place with that weather already\");\r\n                alert.showAndWait();\r\n                return;\r\n            }\r\n        }\r\n        try {\r\n            climateQueue.enQueue(climate);\r\n            climateList.add(climate); // actualiza el TableView\r\n            tf_place.clear();\r\n            cb_weather.setValue(null);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void ToOnAction(ActionEvent actionEvent) throws StackException {\r\n        //de Queue a Stack\r\n        if (!climateQueue.isEmpty()) {\r\n            while (!climateQueue.isEmpty()) {\r\n                climateStack.push(climateQueue.deQueue());\r\n            }\r\n            tv_queue.setItems(emptyClimateList);\r\n            tv_stack.setItems(climateList);\r\n        }else //de Stack a Queue\r\n        {\r\n            while (!climateStack.isEmpty()) {\r\n                climateQueue.enQueue(climateStack.pop());\r\n            }\r\n            tv_queue.setItems(climateList);\r\n            tv_stack.setItems(emptyClimateList);\r\n        }\r\n    }\r\n\r\n    @javafx.fxml.FXML\r\n    public void AutoEnQueueOnAction(ActionEvent actionEvent) {\r\n        //validacion para no meter valores en la pila\r\n        if (!climateStack.isEmpty()){\r\n            Alert alert = new Alert(Alert.AlertType.WARNING);\r\n            alert.setTitle(\"Warning\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"You can only add in a Queue\");\r\n            alert.showAndWait();\r\n            return;\r\n        }\r\n        int count = 0;\r\n        while (count < 20) {\r\n            String placeName = util.Utility.getPlace();\r\n            String weatherType = util.Utility.getWeather();\r\n            // se verifica si ya existe ese climate\r\n            boolean duplicated = false;\r\n            for (Climate c : climateList) {\r\n                if (c.getPlace().getName().equalsIgnoreCase(placeName) &&\r\n                        c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {\r\n                    duplicated = true;\r\n                    break;\r\n                }\r\n            }\r\n\r\n            if (!duplicated) {\r\n                Place place = new Place(placeName);\r\n                Weather weather = new Weather(weatherType);\r\n                Climate climate = new Climate(place, weather);\r\n\r\n                try {\r\n                    climateQueue.enQueue(climate);\r\n                    climateList.add(climate);\r\n                    count++; // se aumenta si no era duplicado\r\n                } catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        }\r\n        tf_place.clear();\r\n        cb_weather.setValue(null);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/controller/QueueToStackController.java b/src/main/java/controller/QueueToStackController.java
+--- a/src/main/java/controller/QueueToStackController.java	(revision 83a6438670f8d62549ed58d7935e76640964791e)
++++ b/src/main/java/controller/QueueToStackController.java	(date 1746222687517)
+@@ -1,8 +1,10 @@
+ package controller;
+ 
+ import domain.*;
+-import domain.Stack.LinkedStack;
+-import domain.Stack.StackException;
++import domain.queue.LinkedQueue;
++import domain.queue.QueueException;
++import domain.stack.LinkedStack;
++import domain.stack.StackException;
+ import javafx.beans.property.SimpleStringProperty;
+ import javafx.collections.FXCollections;
+ import javafx.collections.ObservableList;
+@@ -38,7 +40,7 @@
+ 
+         TableColumn<Climate, String> weatherColumnQueue = new TableColumn<>("Weather");
+         weatherColumnQueue.setCellValueFactory(data ->
+-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
++                new SimpleStringProperty(data.getValue().getWeather().getName()));
+ 
+         tv_queue.getColumns().addAll(placeColumnQueue, weatherColumnQueue);
+         tv_queue.setItems(climateList);
+@@ -50,7 +52,7 @@
+ 
+         TableColumn<Climate, String> weatherColumnStack = new TableColumn<>("Weather");
+         weatherColumnStack.setCellValueFactory(data ->
+-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
++                new SimpleStringProperty(data.getValue().getWeather().getName()));
+ 
+         tv_stack.getColumns().addAll(placeColumnStack, weatherColumnStack);
+         tv_stack.setItems(emptyClimateList);
+@@ -92,7 +94,7 @@
+         Climate climate = new Climate(place, weather);
+         for (Climate c : climateList) {
+             if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
+-                    c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
++                    c.getWeather().getName().equalsIgnoreCase(weatherType)) {
+                 Alert alert = new Alert(Alert.AlertType.WARNING);
+                 alert.setTitle("Warning");
+                 alert.setHeaderText(null);
+@@ -112,7 +114,7 @@
+     }
+ 
+     @javafx.fxml.FXML
+-    public void ToOnAction(ActionEvent actionEvent) throws StackException {
++    public void ToOnAction(ActionEvent actionEvent) throws StackException, QueueException {
+         //de Queue a Stack
+         if (!climateQueue.isEmpty()) {
+             while (!climateQueue.isEmpty()) {
+@@ -149,7 +151,7 @@
+             boolean duplicated = false;
+             for (Climate c : climateList) {
+                 if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
+-                        c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
++                        c.getWeather().getName().equalsIgnoreCase(weatherType)) {
+                     duplicated = true;
+                     break;
+                 }

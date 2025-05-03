@@ -1,13 +1,15 @@
 package controller;
 
 import domain.*;
-import domain.Stack.LinkedStack;
-import domain.Stack.StackException;
+import domain.queue.QueueException;
+import domain.stack.LinkedStack;
+import domain.stack.StackException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import domain.queue.LinkedQueue;
 
 public class QueueToStackController
 {
@@ -39,9 +41,13 @@ public class QueueToStackController
         placeColumnQueue.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getPlace().getName()));
 
+
         TableColumn<Climate, String> weatherColumnQueue = new TableColumn<>("Weather");
         weatherColumnQueue.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
+                new SimpleStringProperty(data.getValue().getWeather().getName()));
+        placeColumnQueue.prefWidthProperty().bind(tv_queue.widthProperty().multiply(0.6));
+        weatherColumnQueue.prefWidthProperty().bind(tv_queue.widthProperty().multiply(0.5));
+
 
         tv_queue.getColumns().addAll(placeColumnQueue, weatherColumnQueue);
         tv_queue.setItems(climateList);
@@ -53,7 +59,9 @@ public class QueueToStackController
 
         TableColumn<Climate, String> weatherColumnStack = new TableColumn<>("Weather");
         weatherColumnStack.setCellValueFactory(data ->
-                new SimpleStringProperty(data.getValue().getWeather().getDescription()));
+                new SimpleStringProperty(data.getValue().getWeather().getName()));
+        placeColumnStack.prefWidthProperty().bind(tv_stack.widthProperty().multiply(0.6));
+        weatherColumnStack.prefWidthProperty().bind(tv_stack.widthProperty().multiply(0.5));
 
         tv_stack.getColumns().addAll(placeColumnStack, weatherColumnStack);
         tv_stack.setItems(emptyClimateList);
@@ -96,7 +104,7 @@ public class QueueToStackController
         Climate climate = new Climate(place, weather);
         for (Climate c : climateList) {
             if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                    c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
+                    c.getWeather().getName().equalsIgnoreCase(weatherType)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -116,7 +124,7 @@ public class QueueToStackController
     }
 
     @javafx.fxml.FXML
-    public void ToOnAction(ActionEvent actionEvent) throws StackException {
+    public void ToOnAction(ActionEvent actionEvent) throws StackException, QueueException {
         climateList.clear();
         //de Queue a Stack
         if (!climateQueue.isEmpty()) {
@@ -158,7 +166,7 @@ public class QueueToStackController
             boolean duplicated = false;
             for (Climate c : climateList) {
                 if (c.getPlace().getName().equalsIgnoreCase(placeName) &&
-                        c.getWeather().getDescription().equalsIgnoreCase(weatherType)) {
+                        c.getWeather().getName().equalsIgnoreCase(weatherType)) {
                     duplicated = true;
                     break;
                 }

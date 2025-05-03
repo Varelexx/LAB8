@@ -36,7 +36,7 @@ public class Utility {
     }
 
     public static int getRandom(int bound) {
-        return new Random().nextInt(bound)+1;
+        return new Random().nextInt(bound);
     }
 
     public static int compare(Object a, Object b) {
@@ -153,7 +153,7 @@ public class Utility {
     }
 
     public static int getAttentionTime(){
-       return getRandom(99)*1000;
+       return getRandom(99)+1;
     }
 
     public static String getName() {

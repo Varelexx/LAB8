@@ -3,10 +3,10 @@ package domain;
 public class Person {
     public String name;
     public String mood; //alegre,triste,enojao
-    public  int attentionTime;//expresado en milisegundos
+    public  String attentionTime;//expresado en milisegundos
     private int priority;
 
-    public Person(String name, String mood, int attentionTime) {
+    public Person(String name, String mood, String attentionTime) {
         this.name = name;
         this.mood = mood;
         this.attentionTime = attentionTime;
@@ -38,11 +38,11 @@ public class Person {
         this.mood = mood;
     }
 
-    public int getAttentionTime() {
+    public String getAttentionTime() {
         return attentionTime;
     }
 
-    public void setAttentionTime(int attentionTime) {
+    public void setAttentionTime(String attentionTime) {
         this.attentionTime = attentionTime;
     }
 

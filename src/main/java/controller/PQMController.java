@@ -76,10 +76,20 @@ public class PQMController {
     public void OnActionenqueue(ActionEvent actionEvent) {
         String name = txf_name.getText();
         String mood = cbox_mood.getValue();
-        String priorityStr = cbox_priority.getValue(); // Obtener el valor como String ("Low", "Medium", "High")
+        String priorityStr = cbox_priority.getValue();
 
         if (name != null && !name.isEmpty() && mood != null && priorityStr != null) {
-            // Convertir "Low", "Medium", "High" a 0, 1, 2
+
+            // Validación nueva
+            if (isDuplicatePerson(name, mood)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Duplicado");
+                alert.setHeaderText(null);
+                alert.setContentText("Ya a sido ingresada esta persona con el mismo estado de animo\nPorfavor intentelo denuevo");
+                alert.showAndWait();
+                return;
+            }
+
             int priority;
             switch (priorityStr) {
                 case "Low" -> priority = 0;
@@ -88,7 +98,7 @@ public class PQMController {
                 default -> throw new IllegalArgumentException("Prioridad no válida: " + priorityStr);
             }
 
-            int attentionTime = Utility.getAttentionTime();
+            String attentionTime = String.valueOf(Utility.getAttentionTime()+" minutes");
             Person person = new Person(name, mood, attentionTime);
             person.setPriority(priority);
 
@@ -99,27 +109,31 @@ public class PQMController {
                 e.printStackTrace();
             }
         }
-        System.out.println(priorityQueue);
     }
 
     @javafx.fxml.FXML
     public void OnActionautoEnqueue(ActionEvent actionEvent) {
-        for (int i = 0; i < 20; i++) {
+        int added = 0;
+
+        while (added < 20) {
             String name = Utility.getName();
             String mood = Utility.getMood();
             int priority = Utility.getRandom(3);
-            int attentionTime = Utility.getAttentionTime();
+            String attentionTime = String.valueOf(Utility.getAttentionTime()+" minutes");
 
-            Person person = new Person(name, mood, attentionTime);
+            if (!isDuplicatePerson(name, mood)) {
+                Person person = new Person(name, mood, attentionTime);
+                person.setPriority(priority);
 
-            try {
-                if (!priorityQueue.contains(person)) {
+                try {
                     priorityQueue.enQueue(person, priority);
+                    added++; // Solo contamos si se agregó correctamente
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
+
         refreshTableView();
     }
 
@@ -130,7 +144,7 @@ public class PQMController {
                 Person person = (Person) priorityQueue.deQueue();
                 txa_attetntionprocess.appendText("Atendiendo a " + person.getName()
                         + " con estado de ánimo: " + person.getMood()
-                        + " y tiempo de atención: " + person.getAttentionTime() + "ms\n");
+                        + " y tiempo de atención: " + person.getAttentionTime()+"\n");
                 refreshTableView();
             }
         } catch (Exception e) {
@@ -144,7 +158,6 @@ public class PQMController {
         cbox_priority.setValue(null);
         cbox_mood.setValue(null);
         txa_attetntionprocess.clear();
-        priorityQueue.clear();
         refreshTableView();
     }
 
@@ -154,5 +167,17 @@ public class PQMController {
 
     @javafx.fxml.FXML
     public void cbox_mood(ActionEvent actionEvent) {
+    }
+
+    private boolean isDuplicatePerson(String name, String mood) {
+        domain.queue.Node current = priorityQueue.getFront();
+        while (current != null) {
+            Person person = (Person) current.data;
+            if (person.getName().equalsIgnoreCase(name.trim()) && person.getMood().equalsIgnoreCase(mood.trim())) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
     }
 }
